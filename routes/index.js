@@ -4,7 +4,7 @@ const util = require('./util.js')
 const db = require('./crud')
 let User = require('../models/user.model');
 router.get('/', async (ctx, next) => {
-  
+
   await ctx.render('index', {
     title: '量价突破监控'
   })
@@ -12,18 +12,22 @@ router.get('/', async (ctx, next) => {
 })
 
 router.post('/mt4', async (ctx, next) => {
-  let accountid = ctx.request.body;
-  console.log(ctx.request.body)
+  let id = ctx.request.body;
+  let accountid = Object.keys(id)[0]
+  let chr = "\u0000";
+  let reg = "/" + chr + "/g";
+  accountid = accountid.replace(eval(reg), ""); //mt4发过来的数据包含u0000
+
   let res = await db.getByAccountId(accountid)
   if (res.length == 0) {
-      let user = new User({
-          endDate: util.formatTommorow(new Date()),
-          accountid: accountid
-      });
-      let saveres = await db.Save(user)
-      ctx.body = 'save success';
-  }else{
-    ctx.body =  res[0].endDate
+    let user = new User({
+      endDate: util.formatTommorow(new Date()),
+      accountid: accountid
+    });
+    let saveres = await db.Save(user)
+    ctx.body = 'save success';
+  } else {
+    ctx.body = res[0].endDate
   }
 })
 
