@@ -1,12 +1,34 @@
 const db = require('./crud')
-var Macd = require('./models/macd.model');
-var macd_ltc = new Macd({
-    symbol: 'ltcusdt',
-    close0: 137,
-    cross:'Waiting',
-    zeroAxis:'Waiting'
-});
+const util = require('./util.js')
+let User = require('../models/user.model');
+// let user = new User({
+//     username: 'jyq',
+//     endDate: new Date('2020-05-20'),
+//     accountid: '60001'
+// });
 
+// db.Save(user).then(v=> console.log(v))
+// db.getByAccountId('60001').then(res =>{
+//     console.log(res)
+// })
+
+const mql = async v => {
+    let res = await db.getByAccountId(v)
+    if (res.length == 0) {
+        let user = new User({
+            endDate: util.formatTommorow(new Date()),
+            accountid: v
+        });
+        let saveres = await db.Save(user)
+        return null;
+    }else{
+        return res[0].endDate
+    }
+
+};
+ mql('123').then(res =>{
+    console.log(res)
+ })
 
 // db.SaveCross(macd_ltc).then(v=> console.log(v))
 // db.getBySymbol('trxusdt').then(v => {
@@ -16,7 +38,7 @@ var macd_ltc = new Macd({
 
 // db.delAll().then(v => console.log(v))
 // db.getAll().then(v => console.log(v))
-db.get24hour(24).then(v => console.log(v))
+// db.get24hour(24).then(v => console.log(v))
 // let date = new   Date();
 // let time_test = '2019-06-21 15:14:00';
 // let date0 = new Date(time_test);
