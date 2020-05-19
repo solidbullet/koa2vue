@@ -6,8 +6,13 @@ let User = require('../models/user.model');
 //     endDate: new Date('2020-05-20'),
 //     accountid: '60001'
 // });
-
+// db.deleteByID('5ec34a5b77a91b2b28719f77').then(res =>{
+//     console.log(res)
+// })
 // db.Save(user).then(v=> console.log(v))
+// db.updateByID('2125309673',{endDate:util.formatTommorow(new Date())}).then(res =>{
+//     console.log(res)
+// })
 db.getAll().then(res =>{
     console.log(res)
 })

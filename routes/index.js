@@ -27,6 +27,7 @@ router.post('/mt4', async (ctx, next) => {
     let saveres = await db.Save(user)
     ctx.body = 'save success';
   } else {
+    console.log(res)
     ctx.body = res[0].endDate
   }
 })
