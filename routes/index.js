@@ -1,7 +1,7 @@
 const router = require('koa-router')()
 //const ws = require('../crawler/restkline');
 const util = require('./util.js')
-
+const db = require('./crud')
 router.get('/', async (ctx, next) => {
   
   await ctx.render('index', {
