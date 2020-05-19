@@ -10,9 +10,9 @@ let User = require('../models/user.model');
 //     console.log(res)
 // })
 // db.Save(user).then(v=> console.log(v))
-// db.updateByID('2125309673',{endDate:util.formatTommorow(new Date())}).then(res =>{
-//     console.log(res)
-// })
+db.updateByID('2125309673',{endDate:util.formatTommorow(new Date())}).then(res =>{
+    console.log(res)
+})
 db.getAll().then(res =>{
     console.log(res)
 })
