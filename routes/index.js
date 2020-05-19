@@ -10,7 +10,7 @@ router.get('/', async (ctx, next) => {
 
 })
 
-router.get('/mt4', async (ctx, next) => {
+router.post('/mt4', async (ctx, next) => {
   let accountid = ctx.body.id;
   let res = await db.getByAccountId(accountid)
   if (res.length == 0) {
