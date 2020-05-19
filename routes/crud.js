@@ -14,13 +14,13 @@ const addMany = async (model,arr) => await model.insertMany(arr,{ordered:true}).
 const Save = async v => await v.save().catch((error)=>console.log(error));
 const getByUsername = async v => await User.find({username:v}).catch((error)=>console.log(error));
 const getByAccountId = async v => await User.find({accountid:v}).catch((error)=>console.log(error));
-const getByPeriod = async v => await User.find({period:v}).catch((error)=>console.log(error));
+const updateByID = async (id,updateobj) => await User.findOneAndUpdate(id,updateobj).catch((error)=>console.log(error));
 const get24hour = async v => await User.where('createdAt').gte(new Date() - v*60*60*1000).catch((error)=>console.log(error));
 const getAll = async () => await User.find({}).catch((error)=>console.log(error));
 const delAll = async () => await User.deleteMany({}).catch((error)=>console.log(error));
 const getlimit = async () => await User.where('symbol').in(['btcusdt', 'eosusdt', 'art']).limit(10).catch((error)=>console.log(error));
 
-module.exports = {Save,getByUsername,getAll,delAll,addMany,getByPeriod,get24hour,getByAccountId};
+module.exports = {Save,getByUsername,getAll,delAll,addMany,updateByID,get24hour,getByAccountId};
 
 
 

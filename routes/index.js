@@ -12,8 +12,8 @@ router.get('/', async (ctx, next) => {
 })
 
 router.post('/mt4', async (ctx, next) => {
-  let accountid = ctx.body;
-  console.log(ctx.body)
+  let accountid = ctx.request.body;
+  console.log(ctx.request)
   let res = await db.getByAccountId(accountid)
   if (res.length == 0) {
       let user = new User({

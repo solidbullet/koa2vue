@@ -8,27 +8,27 @@ let User = require('../models/user.model');
 // });
 
 // db.Save(user).then(v=> console.log(v))
-// db.getByAccountId('60001').then(res =>{
-//     console.log(res)
-// })
-
-const mql = async v => {
-    let res = await db.getByAccountId(v)
-    if (res.length == 0) {
-        let user = new User({
-            endDate: util.formatTommorow(new Date()),
-            accountid: v
-        });
-        let saveres = await db.Save(user)
-        return null;
-    }else{
-        return res[0].endDate
-    }
-
-};
- mql('123').then(res =>{
+db.getAll().then(res =>{
     console.log(res)
- })
+})
+
+// const mql = async v => {
+//     let res = await db.getByAccountId(v)
+//     if (res.length == 0) {
+//         let user = new User({
+//             endDate: util.formatTommorow(new Date()),
+//             accountid: v
+//         });
+//         let saveres = await db.Save(user)
+//         return null;
+//     }else{
+//         return res[0].endDate
+//     }
+
+// };
+//  mql('123').then(res =>{
+//     console.log(res)
+//  })
 
 // db.SaveCross(macd_ltc).then(v=> console.log(v))
 // db.getBySymbol('trxusdt').then(v => {
