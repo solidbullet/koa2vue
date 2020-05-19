@@ -6,7 +6,7 @@ const formatTommorow = date => {
 };
 const formatDate = date => {
     const year = date.getFullYear()
-    const month = date.getMonth() + 1
+    const month = date.getMonth() + 2
     const day = date.getDate()
     return new Date([year, month, day].map(formatNumber).join('-'))
 };
