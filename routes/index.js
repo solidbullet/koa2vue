@@ -3,7 +3,7 @@ const router = require('koa-router')()
 const util = require('./util.js')
 const db = require('./crud')
 let User = require('../models/user.model');
-router.get('/', async (ctx, next) => {
+router.get('/h5', async (ctx, next) => {
   
   await ctx.render('index', {
     title: '量价突破监控'
