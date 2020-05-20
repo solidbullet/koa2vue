@@ -4,20 +4,12 @@ const util = require('./util.js')
 const db = require('./crud')
 let User = require('../models/user.model');
 router.get('/', async (ctx, next) => {
-<<<<<<< HEAD
   
   await ctx.render('index', {
     title: '量价突破监控'
   })
   console.log('index')
   console.log(new Date())
-=======
-
-  await ctx.render('index', {
-    title: '量价突破监控'
-  })
-
->>>>>>> e1cbf9265447f233785c64d4355b41842a88220e
 })
 
 router.post('/mt4', async (ctx, next) => {
