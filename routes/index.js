@@ -3,9 +3,12 @@ const router = require('koa-router')()
 const config = require('../config');
 
 router.get('/', async (ctx, next) => {
+  
   await ctx.render('index', {
     title: '量价突破监控'
   })
+  console.log('index')
+  console.log(new Date())
 })
 
 router.get('/string', async (ctx, next) => {
