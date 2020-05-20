@@ -1,18 +1,44 @@
 const router = require('koa-router')()
 //const ws = require('../crawler/restkline');
-const config = require('../config');
-
+const util = require('./util.js')
+const db = require('./crud')
+let User = require('../models/user.model');
 router.get('/', async (ctx, next) => {
+<<<<<<< HEAD
   
   await ctx.render('index', {
     title: '量价突破监控'
   })
   console.log('index')
   console.log(new Date())
+=======
+
+  await ctx.render('index', {
+    title: '量价突破监控'
+  })
+
+>>>>>>> e1cbf9265447f233785c64d4355b41842a88220e
 })
 
-router.get('/string', async (ctx, next) => {
-  ctx.body = 'koa2 string'
+router.post('/mt4', async (ctx, next) => {
+  let id = ctx.request.body;
+  let accountid = Object.keys(id)[0]
+  let chr = "\u0000";
+  let reg = "/" + chr + "/g";
+  accountid = accountid.replace(eval(reg), ""); //mt4发过来的数据包含u0000
+
+  let res = await db.getByAccountId(accountid)
+  if (res.length == 0) {
+    let user = new User({
+      endDate: util.formatTommorow(new Date()),
+      accountid: accountid
+    });
+    let saveres = await db.Save(user)
+    ctx.body = util.formatTommorow(new Date());
+  } else {
+    console.log(res)
+    ctx.body = res[0].endDate
+  }
 })
 
 router.get('/json', async (ctx, next) => {
